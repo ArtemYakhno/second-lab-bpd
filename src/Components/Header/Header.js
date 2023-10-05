@@ -1,9 +1,9 @@
 import Card from '../UI/Card'
 import style from './Header.module.css'
-const Header = ()=>{
+const Header = (props)=>{
     return(
         <Card cssClass={style.header}>
-            <p>Калькулятор класів залишків</p>
+            <p>{props.text}</p>
             <p>Артем Яхно</p>
         </Card>
     )

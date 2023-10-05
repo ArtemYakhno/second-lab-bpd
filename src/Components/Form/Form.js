@@ -8,6 +8,8 @@ const Form = (props) => {
   const [module, setModule] = useState("");
   const [valueA, setValueA] = useState("");
   const [valueB, setValueB] = useState("");
+  const [valueSimple,setValueSimple]=useState("")
+  const [generatedSimpleValue,setGeneratedSimpleValue]=useState("");
   const [isErrorOcureted, setIsErrorOcureted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -15,6 +17,8 @@ const Form = (props) => {
     setModule("");
     setValueB("");
     setValueA("");
+    setValueSimple("")
+    setGeneratedSimpleValue("")
   };
 
   const changeModuleHandler = (event) => {
@@ -31,6 +35,14 @@ const Form = (props) => {
     setIsErrorOcureted(false);
     setValueB(event.target.value);
   };
+  const changeValueSimpleHandler = (event) => {
+    setIsErrorOcureted(false);
+    setValueSimple(event.target.value);
+  };
+  const changeGeneratedSimpleValueHandler =  (event) => {
+    setIsErrorOcureted(false);
+    setGeneratedSimpleValue(event.target.value);
+  };
 
   const empthyValues = () => {
     setErrorMessage("Всі значення повинні бути заповненні!");
@@ -39,19 +51,18 @@ const Form = (props) => {
 
   const submitHandler = (event, buttonName) => {
     event.preventDefault();
+    console.log("0")
 
-    if (valueA === "" || valueB === "" || module === "") {
-      empthyValues();
-    } else {
       const inputObject = {
         buttonName: buttonName, // Використовуємо передане ім'я кнопки
         valueA: valueA,
         valueB: valueB,
         module: module,
+        N:valueSimple,
+        P:generatedSimpleValue
       };
       console.log(inputObject);
       props.saveDate(inputObject);
-    }
   };
 
   return (
@@ -64,21 +75,38 @@ const Form = (props) => {
         <label>Число b</label>
         <input onChange={changeValueBHandler} value={valueB} type="number" />
         <Button type="submit" onClick={(event) => submitHandler(event, "add")}>
-          a+b mod m
+          a+b 
         </Button>
         <Button type="submit" onClick={(event) => submitHandler(event, "inverse")}>
-          -a mod m
+          -a 
+        </Button>
+        <Button type="submit" onClick={(event) => submitHandler(event, "division")}>
+         a/b 
         </Button>
         <Button type="submit" onClick={(event) => submitHandler(event, "subtract")}>
-          a-b mod m
+          a-b 
         </Button>
         <Button type="submit" onClick={(event) => submitHandler(event, "multiply")}>
-          a*b mod m
+          a*b
         </Button>
         <Button type="submit" onClick={(event) => submitHandler(event, "power")}>
-          a ^ b mod m
+          a ^ b 
         </Button>
+        <Button type="submit" onClick={(event) => submitHandler(event, "mod_inversion")}>
+        a^(-1)
+        </Button>
+        
         <Button onClick={reset}>Очистити</Button>
+        <label>Перевірка простоти числа</label>
+        <input onChange={changeValueSimpleHandler} value={valueSimple} type="number" />
+        <Button type="submit" onClick={(event) => submitHandler(event, "isPrimeInput")}>
+        Перевірити
+        </Button>
+        <label>Генерація простого числа p </label>
+        <input onChange={changeGeneratedSimpleValueHandler} value={generatedSimpleValue} type="number" />
+        <Button type="submit" onClick={(event) => submitHandler(event, "generatePrime")}>
+        Згенерувати
+        </Button>
       </form>
       {isErrorOcureted ? <Error errorMessage={errorMessage} /> : null}
     </Card>

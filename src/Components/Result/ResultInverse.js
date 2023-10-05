@@ -2,8 +2,7 @@ import Card from "../UI/Card";
 import style from "./Result.module.css";
 
 const ResultInverse = (props) => {
-  let finalyResult = "Виконайте обрахунок";
-
+  let finalyResult = "";
   let A = parseInt(props.date.valueA);
   let P = parseInt(props.date.valueP);
   function calculateModularInverse(a, p) {
@@ -34,8 +33,9 @@ const ResultInverse = (props) => {
   const eulerPhi = calculateEulerPhi(P);
   const inverseElement = calculateModularInverse(A, eulerPhi);
 
-  finalyResult = `a^-1 (зворотний елемент) = ${inverseElement} (по модулю ${P})`;
-  console.log("result 3")
+  finalyResult = `a^-1 (зворотний елемент) = ${
+    inverseElement === null ? "Не існує" : inverseElement
+  } (по модулю ${P})`;
   return (
     <Card cssClass={style.result}>
       <h1>Результат</h1>

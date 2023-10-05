@@ -7,8 +7,6 @@ const FormInverse = (props) => {
   const [valueA, setValueA] = useState("");
   const [valueP, setValueP] = useState("");
 
-
-
   const changeValueAHandler = (event) => {
     setValueA(event.target.value);
   };
@@ -18,15 +16,13 @@ const FormInverse = (props) => {
   };
 
   const submitHandler = (event) => {
-   
     event.preventDefault();
-    console.log("2")
-      const inputObject = {
-        valueP: valueP,
-        valueA:valueA
-      };
-      console.log(inputObject);
-      props.saveInverseDate(inputObject);
+
+    const inputObject = {
+      valueP: valueP,
+      valueA: valueA,
+    };
+    props.saveInverseDate(inputObject);
   };
 
   return (
@@ -36,8 +32,8 @@ const FormInverse = (props) => {
         <input onChange={changeValueAHandler} value={valueA} type="number" />
         <label>a (число)</label>
         <input onChange={changeValuePHandler} value={valueP} type="number" />
-        <Button type="submit" onClick ={submitHandler}>
-        Обчислити
+        <Button type="submit" onClick={submitHandler}>
+          Обчислити
         </Button>
       </form>
     </Card>

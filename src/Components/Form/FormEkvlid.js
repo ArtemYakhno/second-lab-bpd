@@ -19,12 +19,10 @@ const FormEkvlid = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log("1")
       const inputObject = {
         valueA: valueA,
         valueB:valueB
       };
-      console.log(inputObject);
       props.saveEkvlidDate(inputObject);
   };
 
